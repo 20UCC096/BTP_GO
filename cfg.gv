@@ -1,0 +1,30 @@
+digraph cfg {
+	f1 [label=main shape=box]
+	b2 [label="var x int = 10 
+var err = \"error\" 
+" shape=box]
+	f1:s -> b2:n
+	if3 [label=cond shape=diamond]
+	b2:s -> if3:n
+	l4 [label="for cond" shape=egg]
+	b5 [label="x = 20 
+" shape=box]
+	l4:s -> b5:n
+	if6 [label="x==10" shape=diamond]
+	b5:s -> if6:n
+	t7 [label="x += 10 
+x += 10 
+" shape=box]
+	e8 [label="x -= 10 
+" shape=box]
+	if6:s -> t7:n [label=true headport=n tailport=w]
+	if6:s -> e8:n [label=false headport=n tailport=e]
+	l4:s -> b5:n
+	t7:s -> d9:n
+	e8:s -> d9:n
+	d9:s -> l4:n [headport=w tailport=w]
+	if3:s -> l4:n [label=true]
+	b10 [label="main end" shape=box]
+	if3:e -> b10:n
+	l4:e -> b10:n
+}
